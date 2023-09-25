@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Quiz-Mobile</title>
     <style>
         body {
             background-color: white;
@@ -79,7 +79,7 @@
         }
 
         #mensagem {
-            font-size: 14pt;
+            font-size: 16pt;
             /* display: none; */
         }
 
@@ -107,19 +107,27 @@
             <button id="option2">Opção 2</button>
         </div>
         <p id="score">Pontuação: 0</p>
+        <ul style="visibility: hidden;">
+            <li style="visibility: hidden;"><a style="visibility: hidden;"
+                    href="https://maiconkappaun.github.io/formulario-feira-cresol/" id="meuLink"></a></li>
+        </ul>
         <div id="mensagem" style="display: none;">
-            <p id="msg">Leia o QRCode, cadastre-se e concora a prêmios!</p>
+            <p id="msg">Cadastre-se no formulário e concora a prêmios!</p>
+            <p id="msg">👇</p>
         </div>
         <div style="display: none;" id="qrcode">
-            <img src="Qrlogo-free.png" alt="">
+            <!-- <img src="Qrlogo-free.png" alt=""> -->
             <br>
-            <button style="font-size: 18pt;" id="reiniciar" onclick="reiniciar()">Novo</button>
+            <button style="font-size: 18pt;" id="cadastrar" onclick="cadastrar()">Cadastrar-se</button>
         </div>
     </div>
 
     <script>
-        function reiniciar() {
-            location.reload();
+        function cadastrar() {
+            var link = document.getElementById("meuLink");
+            if (link) {
+                link.click();
+            }
         }
 
         document.getElementById("start-button").addEventListener("click", startQuiz);
