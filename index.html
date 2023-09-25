@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            background-color: white;
+            /* Cor de fundo padrão */
+            transition: background-color 1s ease;
+            /* Transição suave da cor de fundo */
+        }
+
+        .correct-answer {
+            background-color: green;
+        }
+
+        .incorrect-answer {
+            background-color: red;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            /* background-color: #F58220; */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: background-color 1s ease;
+            background-image: url('https://cresol.com.br/wp-content/uploads/2022/04/Icone-03-300x300.png');
+            background-color: rgba(245, 130, 32, 0.3);
+            /* background-repeat: no-repeat; */
+            background-size: 7em;
+        }
+
+        #quiz-container {
+            display: none;
+            /* Inicialmente oculto */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #F58220;
+        }
+
+        button {
+            background-color: #F58220;
+            color: white;
+            border: none;
+            padding: 10px 40px;
+            /* Aumente a largura dos botões */
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #D25400;
+        }
+
+        #start-button {
+            background-color: white;
+            color: #F58220;
+        }
+
+        #option1,
+        #option2 {
+            font-size: 18pt;
+        }
+
+        #mensagem {
+            font-size: 14pt;
+            /* display: none; */
+        }
+
+        @media (max-width: 770px) {
+            #quiz-container {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button id="start-button">
+        <h1>Iniciar Quiz Cresol</h1>
+    </button>
+    <div id="quiz-container">
+        <h1 id="titulo">Quiz</h1>
+        <div style="font-size: 18pt;">
+            <p id="question-text"></p>
+        </div>
+        <div>
+            <button id="option1">Opção 1</button>
+        </div>
+        <div>
+            <button id="option2">Opção 2</button>
+        </div>
+        <p id="score">Pontuação: 0</p>
+        <div id="mensagem" style="display: none;">
+            <p id="msg">Leia o QRCode, cadastre-se e concora a prêmios!</p>
+        </div>
+        <div style="display: none;" id="qrcode">
+            <img src="Qrlogo-free.png" alt="">
+            <br>
+            <button style="font-size: 18pt;" id="reiniciar" onclick="reiniciar()">Novo</button>
+        </div>
+    </div>
+
+    <script>
+        function reiniciar() {
+            location.reload();
+        }
+
+        document.getElementById("start-button").addEventListener("click", startQuiz);
+
+        function startQuiz() {
+            document.getElementById("start-button").style.display = "none";
+            document.getElementById("quiz-container").style.display = "block";
+            showQuestion();
+        }
+        const questions = [
+            {
+                question: "Qual a 3º maior cooperativa de Crédito do Brasil?",
+                options: ["Cresol", "Outra"],
+                correctAnswer: 0
+            },
+            {
+                question: "Qual instituição financeira distribui as sobras no final do exercício?",
+                options: ["Bancos", "Cooperativas"],
+                correctAnswer: 1
+            },
+            {
+                question: "Qual cooperativa de crédito prioriza as pessoas em seus negócios?",
+                options: ["Cresol", "Outra"],
+                correctAnswer: 0
+            },
+            {
+                question: "Qual instituição financeira é completa e oferece produtos e soluções essenciais?",
+                options: ["Cresol", "Outra"],
+                correctAnswer: 0
+            },
+            {
+                question: "Qual instituição financeira facilita sua vida com atendimentos digital e em agências físicas?",
+                options: ["Cresol", "Outra"],
+                correctAnswer: 0
+            },
+            {
+                question: "Qual cooperativa de crédito atua a 18 anos na região?",
+                options: ["Cresol Aliança", "Outra"],
+                correctAnswer: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const titulo = document.getElementById("titulo");
+        const questionText = document.getElementById("question-text");
+        const option1 = document.getElementById("option1");
+        const option2 = document.getElementById("option2");
+        const scoreText = document.getElementById("score");
+        const qrcode = document.getElementById("qroode");
+        const msg = document.getElementById("mensagem");
+
+        function showQuestion() {
+            if (currentQuestion < questions.length) {
+                questionText.textContent = questions[currentQuestion].question;
+                option1.textContent = questions[currentQuestion].options[0];
+                option2.textContent = questions[currentQuestion].options[1];
+                // Resetando a cor de fundo
+                document.body.classList.remove("correct-answer", "incorrect-answer");
+            } else {
+                // Exibição do resultado final
+                titulo.textContent = "Quiz finalizado!";
+                questionText.style.display = "none";
+                option1.style.display = "none";
+                option2.style.display = "none";
+                scoreText.textContent = `Pontuação final: ${score} de 6`;
+                scoreText.style.fontSize = `18pt`;
+                document.getElementById('qrcode').style.display = 'block';
+                msg.style.display = 'block';
+                // Restaurando a cor de fundo branca
+                // document.body.style.backgroundColor = "white";
+                document.body.classList.remove("correct-answer", "incorrect-answer");
+            }
+        }
+
+        function checkAnswer(answer) {
+            const correctAnswer = questions[currentQuestion].correctAnswer;
+            if (answer === correctAnswer) {
+                score++;
+                // Aplicando a classe CSS para cor de fundo correta
+                document.body.classList.add("correct-answer");
+            } else {
+                // Aplicando a classe CSS para cor de fundo incorreta
+                document.body.classList.add("incorrect-answer");
+            }
+            currentQuestion++;
+            scoreText.textContent = `Pontuação: ${score} de 6`;
+            // Espera 1 segundo antes de mostrar a próxima pergunta
+            setTimeout(showQuestion, 1000);
+        }
+
+        option1.addEventListener("click", () => checkAnswer(0));
+        option2.addEventListener("click", () => checkAnswer(1));
+
+        // Inicialização do quiz
+        showQuestion();
+    </script>
+</body>
+
+</html>
