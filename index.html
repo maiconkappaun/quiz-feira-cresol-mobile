@@ -144,29 +144,9 @@
                 correctAnswer: 0
             },
             {
-                question: "Qual instituição financeira distribui as sobras no final do exercício?",
-                options: ["Bancos", "Cooperativas"],
-                correctAnswer: 1
-            },
-            {
-                question: "Qual cooperativa de crédito prioriza as pessoas em seus negócios?",
-                options: ["Cresol", "Outra"],
-                correctAnswer: 0
-            },
-            {
-                question: "Qual instituição financeira é completa e oferece produtos e soluções essenciais?",
-                options: ["Cresol", "Outra"],
-                correctAnswer: 0
-            },
-            {
-                question: "Qual instituição financeira facilita sua vida com atendimentos digital e em agências físicas?",
-                options: ["Cresol", "Outra"],
-                correctAnswer: 0
-            },
-            {
                 question: "Qual cooperativa de crédito atua a 18 anos na região?",
-                options: ["Cresol Aliança", "Outra"],
-                correctAnswer: 0
+                options: ["Outra", "Cresol Aliança"],
+                correctAnswer: 1
             }
         ];
 
@@ -194,7 +174,7 @@
                 questionText.style.display = "none";
                 option1.style.display = "none";
                 option2.style.display = "none";
-                scoreText.textContent = `Pontuação final: ${score} de 6`;
+                scoreText.textContent = `Pontuação final: ${score} de 2`;
                 scoreText.style.fontSize = `18pt`;
                 document.getElementById('qrcode').style.display = 'block';
                 msg.style.display = 'block';
@@ -215,7 +195,7 @@
                 document.body.classList.add("incorrect-answer");
             }
             currentQuestion++;
-            scoreText.textContent = `Pontuação: ${score} de 6`;
+            scoreText.textContent = `Pontuação: ${score} de 2`;
             // Espera 1 segundo antes de mostrar a próxima pergunta
             setTimeout(showQuestion, 1000);
         }
