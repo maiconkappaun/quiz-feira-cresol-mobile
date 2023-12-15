@@ -137,17 +137,44 @@
             document.getElementById("quiz-container").style.display = "block";
             showQuestion();
         }
+        let valor = Math.floor(Math.random() * (2 - 0 + 1)) + 0
         const questions = [
-            {
-                question: "Qual a 3º maior cooperativa de Crédito do Brasil?",
-                options: ["Cresol", "Outra"],
-                correctAnswer: 0
-            },
-            {
-                question: "Qual cooperativa de crédito atua a 18 anos na região?",
-                options: ["Outra", "Cresol Aliança"],
-                correctAnswer: 1
-            }
+            [
+                {
+                    question: "Qual a 3º maior cooperativa de Crédito do Brasil?",
+                    options: ["Cresol", "Outra"],
+                    correctAnswer: 0
+                },
+                {
+                    question: "Qual cooperativa de crédito atua a 18 anos na região?",
+                    options: ["Outra", "Cresol Aliança"],
+                    correctAnswer: 1
+                }
+            ],
+            [
+                {
+                    question: "Qual cooperativa de crédito prioriza as pessoas em seus negócios?",
+                    options: ["Outra", "Cresol Aliança"],
+                    correctAnswer: 1
+                },
+                {
+                    question: "Qual instituição financeira distribui as sobras no final do exercício?",
+                    options: ["Cooperativas", "Bancos"],
+                    correctAnswer: 0
+                },
+            ],
+            [
+                {
+                    question: "Qual instituição financeira facilita sua vida com atendimentos digital e em agências físicas?",
+                    options: ["Cresol", "Outra"],
+                    correctAnswer: 0
+                },
+                {
+                    question: "Qual a 3º maior cooperativa de Crédito do Brasil?",
+                    options: ["Outra", "Cresol"],
+                    correctAnswer: 1
+                }
+            ],
         ];
 
         let currentQuestion = 0;
@@ -162,10 +189,10 @@
         const msg = document.getElementById("mensagem");
 
         function showQuestion() {
-            if (currentQuestion < questions.length) {
-                questionText.textContent = questions[currentQuestion].question;
-                option1.textContent = questions[currentQuestion].options[0];
-                option2.textContent = questions[currentQuestion].options[1];
+            if (currentQuestion < questions[valor].length) {
+                questionText.textContent = questions[valor][currentQuestion].question;
+                option1.textContent = questions[valor][currentQuestion].options[0];
+                option2.textContent = questions[valor][currentQuestion].options[1];
                 // Resetando a cor de fundo
                 document.body.classList.remove("correct-answer", "incorrect-answer");
             } else {
@@ -185,7 +212,7 @@
         }
 
         function checkAnswer(answer) {
-            const correctAnswer = questions[currentQuestion].correctAnswer;
+            const correctAnswer = questions[valor][currentQuestion].correctAnswer;
             if (answer === correctAnswer) {
                 score++;
                 // Aplicando a classe CSS para cor de fundo correta
